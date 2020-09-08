@@ -1,7 +1,3 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import itertools
 import os
 import sys
@@ -87,8 +83,3 @@ class RarCracker:
                     self.sema.release()
                     return
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    cracker = RarCracker('./test.rar', 3, 3, workers=2, charset='1234567890')
-    cracker.crack()

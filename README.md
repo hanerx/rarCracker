@@ -8,17 +8,27 @@ A python based compressed file cracker
 
 ## Install
 
-- download file
+### From git
+
+- `git clone https://github.com/hanerx/rarCracker.git ` 
 
 - run `pip install -r requriement.txt`
 
 - make sure you have installed `winrar` or `unar` or `bsdstar` 
 
-- run `python ./main.py` for example
+- run `python -m rarCracker`
+
+## From release
+- download file
+- run `pip install rarCracker-0.0.1.tar.gz`
+- run `python -m rarCracker`
+## From pypi
+- run `pip install rarCracker`
 
 ## Usage
 
 ```python
+from rarCracker import RarCracker
 if __name__ == '__main__':
     cracker = RarCracker('file_path', 3, 3, workers=2, charset='1234567890')
     cracker.crack()

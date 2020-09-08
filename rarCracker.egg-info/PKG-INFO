@@ -1,0 +1,18 @@
+Metadata-Version: 1.1
+Name: rarCracker
+Version: 0.0.1
+Summary: A simple compressed file cracker
+Home-page: https://github.com/hanerx/rarCracker
+Author: hanerx
+Author-email: UNKNOWN
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: MacOS
+Classifier: Operating System :: Microsoft
+Classifier: Operating System :: POSIX
+Classifier: Operating System :: Unix
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.6
