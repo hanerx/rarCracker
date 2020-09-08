@@ -1,5 +1,7 @@
 # Simple Compressed File Cracker
 
+[![GitHub All Releases](https://img.shields.io/github/downloads/hanerx/rarCracker/total)](https://github.com/hanerx/rarCracker/releases/latest)  ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rarCracker) [![PyPI](https://img.shields.io/pypi/v/rarCracker)](https://pypi.org/project/rarCracker/)
+
 A python based compressed file cracker
 
 - generate password from ASCII charset or custom charset using `charset` param
@@ -19,10 +21,10 @@ A python based compressed file cracker
 - run `python -m rarCracker`
 
 ## From release
-- download file
+- download file from [release](https://github.com/hanerx/rarCracker/releases/latest) 
 - run `pip install rarCracker-0.0.1.tar.gz`
 - run `python -m rarCracker`
-## From pypi
+## From pip
 - run `pip install rarCracker`
 
 ## Usage
