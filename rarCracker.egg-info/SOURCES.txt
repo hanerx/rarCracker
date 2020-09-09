@@ -2,7 +2,9 @@ README.md
 setup.py
 rarCracker/__init__.py
 rarCracker/__main__.py
+rarCracker/local_provider.py
 rarCracker/main.py
+rarCracker/provider.py
 rarCracker.egg-info/PKG-INFO
 rarCracker.egg-info/SOURCES.txt
 rarCracker.egg-info/dependency_links.txt
