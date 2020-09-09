@@ -29,6 +29,8 @@ A python based compressed file cracker
 
 ## Usage
 
+### Basic
+
 ```python
 from rarCracker import RarCracker
 if __name__ == '__main__':
@@ -36,18 +38,71 @@ if __name__ == '__main__':
     cracker.crack()
 ```
 
+### Use Local Dictionary
+
+```python
+from rarCracker import RarCracker, LocalProvider
+
+if __name__ == '__main__':
+    cracker = RarCracker('./test.rar', provider=LocalProvider('./dict.txt'), unrar_tool='unrar')
+    print(cracker.crack())
+```
 
 
-## Param
 
-| name       | type | desc                                                         | default                              | required |
-| ---------- | ---- | ------------------------------------------------------------ | ------------------------------------ | -------- |
-| file_path  | str  | the compressed file path, if file does not exist raise `FileNotFoundError` , if file is not `.rar` or `.zip` raise `TypeError` | None                                 | True     |
-| start      | int  | the minimum password length                                  | 1                                    | False    |
-| stop       | int  | the maximum password length                                  | 10                                   | False    |
-| charset    | str  | the password charset                                         | digits + ascii_letters + punctuation | False    |
-| output     | str  | the output folder                                            | './output'                           | False    |
-| workers    | int  | the number of multi thread                                   | 8                                    | False    |
-| level      | int  | the logging display level                                    | logging.INFO                         | False    |
-| unrar_tool | str  | the decompressing tool, support `unrar` \ `unar` \ `bsdtar`  | 'unrar'                              | False    |
+## API
 
+### RarCracker
+
+The main class for module
+
+#### params
+
+| name       | type     | desc                                                         | default                              | required |
+| ---------- | -------- | ------------------------------------------------------------ | ------------------------------------ | -------- |
+| file_path  | str      | the compressed file path, if file does not exist raise `FileNotFoundError` , if file is not `.rar` or `.zip` raise `TypeError` | None                                 | True     |
+| start      | int      | the minimum password length                                  | 1                                    | False    |
+| stop       | int      | the maximum password length                                  | 10                                   | False    |
+| charset    | str      | the password charset                                         | digits + ascii_letters + punctuation | False    |
+| output     | str      | the output folder                                            | './output'                           | False    |
+| workers    | int      | the number of multi thread                                   | 8                                    | False    |
+| level      | int      | the logging display level                                    | logging.INFO                         | False    |
+| unrar_tool | str      | the decompressing tool, support `unrar` \ `unar` \ `bsdtar`  | 'unrar'                              | False    |
+| provider   | Provider | the password provider, if provider is not `None` it will replace original password generator and `start` \ `stop` \ `charset` will not work | None                                 | False    |
+
+#### Methods
+
+##### crack()
+
+- The method which start cracking, will block until all threads done or password found, if crack failed it will return `None`
+
+- return `None` or `str`
+
+##### generate_password()
+
+- The method which will return an iterator for password
+
+- return `iter`
+
+### Provider
+The abstract class for provider param
+#### Method
+##### generate()
+- The method which will return an iterator for password
+- return `iter`
+
+### LocalProvider
+The class allows get password from local dictionary
+
+### Param
+
+| name | type | desc                                                         | default | required |
+| ---- | ---- | ------------------------------------------------------------ | ------- | -------- |
+| path | str  | the dictionary file path, if file does not exist raise `FileNotFoundError` | None    | True     |
+
+#### Method
+
+##### generate()
+
+- The method which will return an iterator for password
+- return `iter`
