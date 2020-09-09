@@ -136,7 +136,7 @@ The class allows to get password from network dictionary
 
 ##### default_decode(result)
 
-- The method which will decode the response for default
+- The method which will decode the response by default
 - accept json format array, for example `["123","124","125"]`
 - return `list`
 
