@@ -1,6 +1,6 @@
 # Simple Compressed File Cracker
 
-[![GitHub All Releases](https://img.shields.io/github/downloads/hanerx/rarCracker/total)](https://github.com/hanerx/rarCracker/releases/latest)  ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rarCracker) [![PyPI](https://img.shields.io/pypi/v/rarCracker)](https://pypi.org/project/rarCracker/)
+[![GitHub All Releases](https://img.shields.io/github/downloads/hanerx/rarCracker/total)](https://github.com/hanerx/rarCracker/releases/latest)  ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/rarCracker) [![PyPI](https://img.shields.io/pypi/v/rarCracker)](https://pypi.org/project/rarCracker/) ![PyPI - Downloads](https://img.shields.io/pypi/dm/rarCracker) ![GitHub](https://img.shields.io/github/license/hanerx/rarCracker)
 
 A python based compressed file cracker
 
