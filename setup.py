@@ -24,7 +24,8 @@ setup(
     ],
     install_requires=[
         'fastzipfile==2.2',
-        'rarfile==4.0'
+        'rarfile==4.0',
+        'requests~=2.24.0'
     ],
     zip_safe=True,
 )

@@ -1,2 +1,0 @@
-fastzipfile==2.2
-rarfile==4.0
