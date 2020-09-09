@@ -14,7 +14,7 @@ A python based compressed file cracker
 
 - `git clone https://github.com/hanerx/rarCracker.git ` 
 
-- run `pip install -r requriement.txt`
+- run `pip install -r requriements.txt`
 
 - make sure you have installed `winrar` or `unar` or `bsdstar` 
 
@@ -46,6 +46,18 @@ from rarCracker import RarCracker, LocalProvider
 if __name__ == '__main__':
     cracker = RarCracker('./test.rar', provider=LocalProvider('./dict.txt'), unrar_tool='unrar')
     print(cracker.crack())
+```
+
+### Use Network Dictionary
+
+```python
+from rarCracker import RarCracker, NetworkProvider
+
+if __name__ == '__main__':
+    cracker = RarCracker('./test.rar', provider=NetworkProvider('https://hanerx.top/rarCracker/dict.json',
+                                                                method=NetworkProvider.GET))
+    print(cracker.crack())
+
 ```
 
 
@@ -86,21 +98,47 @@ The main class for module
 
 ### Provider
 The abstract class for provider param
-#### Method
+#### Methods
 ##### generate()
 - The method which will return an iterator for password
 - return `iter`
 
 ### LocalProvider
-The class allows get password from local dictionary
+The class allows to get password from local dictionary
 
-### Param
+#### Param
 
 | name | type | desc                                                         | default | required |
 | ---- | ---- | ------------------------------------------------------------ | ------- | -------- |
 | path | str  | the dictionary file path, if file does not exist raise `FileNotFoundError` | None    | True     |
 
-#### Method
+#### Methods
+
+##### generate()
+
+- The method which will return an iterator for password
+- return `iter`
+
+### NetworkProvider
+
+The class allows to get password from network dictionary
+
+#### Param
+
+| name      | type   | desc                                                         | default                     | required |
+| --------- | ------ | ------------------------------------------------------------ | --------------------------- | -------- |
+| url       | str    | the url of the dictionary                                    | None                        | True     |
+| method    | method | the method of request, support `GET` \  `POST` \ `PUT` \ `DELETE` \ `OPTION` \ `HEAD` | NetworkProvider.GET         | False    |
+| on_decode | method | the decode method for response                               | self.default_decode(result) | False    |
+| **kwargs  |        | support params for `requests` module                         | None                        | False    |
+
+#### Methods
+
+##### default_decode(result)
+
+- The method which will decode the response for default
+- accept json format array, for example `["123","124","125"]`
+- return `list`
 
 ##### generate()
 

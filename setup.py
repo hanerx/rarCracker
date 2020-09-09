@@ -4,7 +4,7 @@ import sys
 
 setup(
     name="rarCracker",
-    version="0.0.2",
+    version="0.0.3",
     author="hanerx",  # 作者名字
     author_email="",
     description="A simple compressed file cracker",
@@ -24,7 +24,8 @@ setup(
     ],
     install_requires=[
         'fastzipfile==2.2',
-        'rarfile==4.0'
+        'rarfile==4.0',
+        'requests~=2.24.0'
     ],
     zip_safe=True,
 )
