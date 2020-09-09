@@ -57,7 +57,7 @@ class RarCracker:
                 if lock.locked():
                     return parent_pipe.recv()
                 else:
-                    # sema.acquire()
+                    sema.acquire()
                     queue.put(i)
                     thread = self.CrackThread(self.file, self.output, lock, i, sema, child_pipe, queue)
                     thread.start()
@@ -82,7 +82,7 @@ class RarCracker:
             self.queue = queue
 
         def run(self) -> None:
-            self.sema.acquire()
+            # self.sema.acquire()
             if self.lock.locked():
                 # logging.debug('password found')
                 self.sema.release()
