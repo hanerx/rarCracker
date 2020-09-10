@@ -2,6 +2,10 @@ README.md
 setup.py
 rarCracker/__init__.py
 rarCracker/__main__.py
+rarCracker/breakpoint.py
+rarCracker/default_breakpoint.py
+rarCracker/default_provider.py
+rarCracker/local_breakPoint.py
 rarCracker/local_provider.py
 rarCracker/main.py
 rarCracker/network_provider.py
