@@ -60,6 +60,19 @@ if __name__ == '__main__':
 
 ```
 
+### Use Breakpoint
+
+```python
+from rarCracker import RarCracker, LocalProvider, LocalBreakPoint
+
+if __name__ == '__main__':
+    cracker = RarCracker('./test.rar', provider=LocalProvider('./dict.txt'), unrar_tool='unrar',
+                         break_point=LocalBreakPoint(breakpoint_count=1))
+    print(cracker.crack())
+```
+
+
+
 
 
 ## API
@@ -99,11 +112,31 @@ The main class for module
 ### Provider
 The abstract class for provider param
 #### Methods
-##### generate()
+##### generate(file)
+- The method which will return an iterator for password
+- return `iter`
+
+### DefaultProvider
+
+The default password provider
+
+#### Param
+
+| name    | type | desc                        | default                              | required |
+| ------- | ---- | --------------------------- | ------------------------------------ | -------- |
+| start   | int  | the minimum password length | 1                                    | False    |
+| stop    | int  | the maximum password length | 10                                   | False    |
+| charset | str  | the password charset        | digits + ascii_letters + punctuation | False    |
+
+#### Methods
+
+##### generate(file)
+
 - The method which will return an iterator for password
 - return `iter`
 
 ### LocalProvider
+
 The class allows to get password from local dictionary
 
 #### Param
@@ -114,7 +147,7 @@ The class allows to get password from local dictionary
 
 #### Methods
 
-##### generate()
+##### generate(file)
 
 - The method which will return an iterator for password
 - return `iter`
@@ -140,7 +173,40 @@ The class allows to get password from network dictionary
 - accept json format array, for example `["123","124","125"]`
 - return `list`
 
-##### generate()
+##### generate(file)
 
 - The method which will return an iterator for password
 - return `iter`
+
+### BreakPoint
+
+The abstract class for break_point param
+
+#### Methods
+
+##### generate(provider,file)
+
+- The method which will return a iterator for password with breakpoint supported
+- return `iter`
+
+### DefaultBreakPoint
+
+The default breakpoint when break_point param is None
+
+#### Methods
+
+##### generate(provider,file)
+
+- The method which will return a iterator for password with breakpoint supported
+- return `iter`
+
+### LocalBreakPoint
+
+The breakpoint will save cracking count number into local file and recover the progress from local file
+
+#### Param
+
+| name             | type | desc                                                         | default            | required |
+| ---------------- | ---- | ------------------------------------------------------------ | ------------------ | -------- |
+| breakpoint_path  | str  | the breakpoint file path, if file does not exist counter will start at 0 | './breakpoint.txt' | False    |
+| breakpoint_count | int  | the interval between two breakpoint                          | 1000               | False    |

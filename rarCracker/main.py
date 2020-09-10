@@ -1,21 +1,24 @@
-import itertools
-import os
-import sys
-from string import ascii_letters, digits, punctuation
-import threading
-import fastzipfile
-import rarfile
-import logging
 import gc
-from rarCracker.provider import Provider
+import logging
+import os
+import threading
 from multiprocessing import Pipe
 from queue import Queue
+
+import fastzipfile
+import rarfile
+
+from rarCracker.breakpoint import BreakPoint
+from rarCracker.default_breakpoint import DefaultBreakPoint
+from rarCracker.default_provider import DefaultProvider
+from rarCracker.provider import Provider
 
 
 class RarCracker:
 
     def __init__(self, file_path: str, start: int = 1, stop: int = 10, charset=None, output: str = './output',
-                 workers: int = 4, level=logging.INFO, unrar_tool: str = 'unrar', provider: Provider = None):
+                 workers: int = 4, level=logging.INFO, unrar_tool: str = 'unrar', provider: Provider = None,
+                 break_point: BreakPoint = None):
         rarfile.UNRAR_TOOL = unrar_tool
         if os.path.exists(file_path):
             self.file_path = file_path
@@ -26,34 +29,28 @@ class RarCracker:
 
             else:
                 raise TypeError('unexpect file type')
-            self.start = start
-            self.stop = stop
             self.output = output
             self.workers = workers
-            if charset is None:
-                self.charset = digits + ascii_letters + punctuation
+            if provider is None:
+                self.provider = DefaultProvider(start, stop, charset=charset)
             else:
-                self.charset = charset
-            self.provider = provider
+                self.provider = provider
+            if break_point is None:
+                self.break_point = DefaultBreakPoint()
+            else:
+                self.break_point = break_point
             logging.basicConfig(level=level,
                                 format='%(asctime)s - [Thread:%(thread)d] - %(levelname)s: %(message)s')
         else:
             raise FileNotFoundError(file_path)
-
-    def generate_password(self):
-        for i in range(self.start, self.stop + 1):
-            iterable = itertools.product(self.charset, repeat=i)
-            for j in iterable:
-                yield ''.join(j)
 
     def crack(self):
         if self.file.needs_password():
             queue = Queue(maxsize=self.workers)
             lock = threading.Lock()
             sema = threading.Semaphore(value=self.workers)
-            iterator = self.generate_password() if self.provider is None else self.provider.generate(self.file)
             parent_pipe, child_pipe = Pipe()
-            for i in iterator:
+            for i in self.break_point.generate(self.provider, self.file):
                 if lock.locked():
                     return parent_pipe.recv()
                 else:
