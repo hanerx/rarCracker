@@ -14,7 +14,7 @@ A python based compressed file cracker
 
 - `git clone https://github.com/hanerx/rarCracker.git ` 
 
-- run `pip install -r requriements.txt`
+- run `pip install -r requirements.txt`
 
 - make sure you have installed `winrar` or `unar` or `bsdstar` 
 
